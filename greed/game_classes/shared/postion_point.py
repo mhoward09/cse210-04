@@ -15,7 +15,8 @@ class PositionPoint:
             y (int): the specified y value.
         '''
         #declare self variables from given arguments
-        pass
+        self._x = x
+        self._y = y
 
     def add(self, other):
         ''' Gets a new point that is the sum of this point and a given point.
@@ -27,7 +28,9 @@ class PositionPoint:
             Point: the new point made from the sum of the two points
         '''
         #add two points mathematically
-        pass
+        x = self._x + other.get_x()
+        y = self._y + other.get_y()
+        return PositionPoint(x, y)
 
     def equals(self, other):
         ''' Compares this point with another to see if they are equal (being equal is a collision or catch).
@@ -39,7 +42,7 @@ class PositionPoint:
             boolean: True if both x and y are equal: False if otherwise.
         '''
         #compare two points 
-        pass
+        return self._x == other.get_x() and self._y == other.get_y()
 
     def get_x(self):
         ''' Gets the horizontal distance.
@@ -48,7 +51,7 @@ class PositionPoint:
             integer: the horizontal distance from the origin
         '''
         #return x value
-        pass
+        return self._x
 
     def get_y(self):
         ''' Gets the vertical distance.
@@ -57,7 +60,7 @@ class PositionPoint:
             integer: the vertical distance from the origin
         '''
         #return y value
-        pass 
+        return self._y
 
     def scale(self, factor):
         ''' Scales the point by the provided factor.
@@ -69,4 +72,4 @@ class PositionPoint:
             PositionPoint: A new point that has been scaled.
         '''
         #return value of point that has been multiplied by a factor
-        pass
+        return PositionPoint(self._x * factor, self._y * factor)
