@@ -64,7 +64,7 @@ def main():
     #create the score display
     #equivalent to banner in RFK
     score = GameObjects()
-    score.set_text("")
+    score.set_text("Score: ")
     score.set_font_size(FONT_SIZE)
     score.set_color(WHITE)
     score.set_position(PositionPoint(CELL_SIZE, 0))

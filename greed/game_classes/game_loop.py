@@ -63,10 +63,20 @@ class Game_loop:
         Args:
             cast (object_list): The list of objects
         """
-        banner = object_list.get_first_game_object("banners")
-        robot = object_list.get_first_game_object("robots")
-        artifacts = object_list.get_game_objects("artifacts")
-        pass
+        cast = object_list
+        score = cast.get_first_actor("score")
+        basket = cast.get_first_actor("basket")
+        fallingObject = cast.get_actors("fallingObject")
+
+        score.set_text("Score: %s" % score.get_value())
+        max_x = self._video_service.get_width()
+        max_y = self._video_service.get_height()
+        basket.move_next(max_x, max_y)
+        
+        for gameObject in fallingObject:
+            if basket.get_position().equals(gameObject.get_position()):
+                scoreValue = score.get_value() + gameObject.get_value()
+                score.set_text(scoreValue)    
 
     def _do_outputs(self, object_list):
         """Draws the object_list on the screen.
