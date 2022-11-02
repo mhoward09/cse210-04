@@ -63,12 +63,7 @@ def main():
 
     #create the score display
     #equivalent to banner in RFK
-    """ I don't think we need to create a separate class for PointScore() Melissa
-    what we should do is:
-
-    score = GameObjects
-    """
-    score = PointScore()
+    score = GameObjects()
     score.set_text("")
     score.set_font_size(FONT_SIZE)
     score.set_color(WHITE)
@@ -83,12 +78,7 @@ def main():
     y = int(MAX_Y/2)
     start_position = PositionPoint(x,y)
     #basket creation
-    """ I don't think we need to create a separate class for Basket() Melissa
-    what we should do is:
-
-    basket = GameObjects
-    """
-    basket = Basket()
+    basket = GameObjects()
     basket.set_text("#")
     basket.set_font_size(FONT_SIZE)
     basket.set_color(WHITE)
