@@ -58,9 +58,16 @@ def createFallingObject(objectType, ratio, listObject):
 def main():
     '''The main function that is the entry point of the game. It runs the game_loop and establishes the attributes needed for game play.'''
     #create object lists to create the falling objects, add and remove them
+    #equivalent to Cast() in RFK
     objects = ObjectLists()
 
     #create the score display
+    #equivalent to banner in RFK
+    """ I don't think we need to create a separate class for PointScore() Melissa
+    what we should do is:
+
+    score = GameObjects
+    """
     score = PointScore()
     score.set_text("")
     score.set_font_size(FONT_SIZE)
@@ -71,10 +78,16 @@ def main():
 
     #create basket
     #basket starting postion
+    #equivalent to ROBOT in RFK
     x = int(MAX_X/2)
     y = int(MAX_Y/2)
     start_position = PositionPoint(x,y)
     #basket creation
+    """ I don't think we need to create a separate class for Basket() Melissa
+    what we should do is:
+
+    basket = GameObjects
+    """
     basket = Basket()
     basket.set_text("#")
     basket.set_font_size(FONT_SIZE)
@@ -84,9 +97,11 @@ def main():
     objects.add_object("basket", basket)
 
     #create rock objects
+    #equivalent to artifacts in RFK
     createFallingObject("Rock", 2, objects)
 
     #create gem objects
+    #equivalent to artifacts in RFK
     createFallingObject("Gems", 1, objects)
 
     #start the game
