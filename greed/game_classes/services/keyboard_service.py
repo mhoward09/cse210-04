@@ -4,7 +4,7 @@ import pyray as pr
 #import needed classes
 from game_classes.shared.postion_point import PositionPoint
 
-class Keyboard:
+class key_board:
     ''' Detects player keyboard input
 
     Responsibility: detect player key presses and translate them into a PositionPoint representing a direction (left or right).
