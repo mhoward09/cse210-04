@@ -1,5 +1,5 @@
 #import needed libraries
-import pyray as pr
+import pyray 
 
 class windowService:
     '''Outputs the game state.
@@ -18,17 +18,25 @@ class windowService:
             debug (bool): whether or not to draw in debug mode.
             '''
         #declare self variables and attributes from arguments
-        pass
+        self._caption = caption
+        self._width = width
+        self._height = height
+        self._square_size = square_size
+        self._frame_rate = frame_rate
+        self._debug = debug
 
     def close_window(self):
         ''' Closes the window and releases all computing resources
         '''
-        pass
+         pyray.close_window()
 
     def clear_buffer(self):
         '''Clears the buffer in preparation for the next rendering. this method should be called at the beginning of the game's output phase
         '''
-        pass
+        pyray.begin_drawing()
+        pyray.clear_background(pyray.BLACK)
+        if self._debug == True:
+            self._draw_grid()
 
     def draw_object(self, object):
         '''Draws the given object's text on the screen.
@@ -36,7 +44,12 @@ class windowService:
         Args:
             object (Game_object or a child class of Game_object: the object to be drawn on the screen.
         '''
-        pass
+        text = object.get_text()
+        x = object.get_position().get_x()
+        y = object.get_position().get_y()
+        font_size = object.get_font_size()
+        color = object.get_color().to_tuple()
+        pyray.draw_text(text, x, y, font_size, color)
 
     def draw_objectList(self, objectList):
         ''' Draws the objects in the given list of objects.
@@ -44,12 +57,13 @@ class windowService:
         Args:
             objectList (list): a list of objects to draw.
         '''
-        pass
+        for object in objectList:
+            self.draw_object(object)
 
     def flush_buffer(self):
         ''' Copies the buffer contents to the screen. This method should be called at the end of the game's output phase.
         '''
-        pass
+        pyray.end_drawing()
 
     def get_square_size(self):
         '''Get's the video screen's square size.
@@ -57,7 +71,7 @@ class windowService:
         Returns:
             Gird: the video screen's square size.
         '''
-        pass
+        return self._square_size
 
     def get_height(self):
         '''Gets the video screen's height.
@@ -65,7 +79,7 @@ class windowService:
         Returns:
             Grid: the video screen's height.
         '''
-        pass
+        return self._height
 
     def get_width(self):
         ''' Gets the video screen's width
@@ -73,7 +87,7 @@ class windowService:
         Returns:
             Grid: the video screen's width
         '''
-        pass
+        return self._width
 
     def is_window_open(self):
         ''' Whether or not the window was closed by the user.
@@ -81,7 +95,7 @@ class windowService:
         Returns:
             bool: True if the window is closing: False if otherwise.
         '''
-        pass
+        return not pyray.window_should_close()
 
     def open_window(self):
         ''' Opens a new window with the provided caption.
@@ -89,9 +103,13 @@ class windowService:
         Args:
             caption (string): the caption provided to be the title.
         '''
-        pass
+        pyray.init_window(self._width, self._height, self._caption)
+        pyray.set_target_fps(self._frame_rate)
 
     def _draw_grid(self):
         '''Draws a grid ont he screen. Used for debugging purposes
         '''
-        pass
+        for y in range(0, self._height, self._square_size):
+            pyray.draw_line(0, y, self._width, y, pyray.GRAY)
+        for x in range(0, self._width, self._square_size):
+            pyray.draw_line(x, 0, x, self._height, pyray.GRAY)
