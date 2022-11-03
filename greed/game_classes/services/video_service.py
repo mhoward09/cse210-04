@@ -1,23 +1,23 @@
 #import needed libraries
 import pyray as pr
 
-class VideoService:
+class WindowService:
     '''Outputs the game state.
 
     Responsibility: to control the game window and draw the game objects
     '''
-    def __init__(self, caption, width, height, cell_size, frame_rate, debug = False):
-        ''' Constructs a new VideoService using the specified debug mode.
+    def __init__(self, caption, width, height, square_size, frame_rate, debug = False):
+        ''' Constructs a new WindowService using the specified debug mode.
         
         Args:
             caption (string): the caption to be displayed
             width (int): the width of the window displayed
             height (int): the height of the window displayed.
-            cell_size (int): the size of the cell of the game grid.
+            square_size (int): the size of the square of the game grid.
             frams_rate (int): the rate of frame refresh and speed of the game.
             debug (bool): whether or not to draw in debug mode.
             '''
-        #declasre self variables and attributes from arguments
+        #declare self variables and attributes from arguments
         pass
 
     def close_window(self):
@@ -51,11 +51,11 @@ class VideoService:
         '''
         pass
 
-    def get_cell_size(self):
-        '''Get's the video screen's cell size.
+    def get_square_size(self):
+        '''Get's the video screen's square size.
         
         Returns:
-            Gird: the video screen's cell size.
+            Gird: the video screen's square size.
         '''
         pass
 
