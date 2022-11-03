@@ -4,20 +4,20 @@ class Game_loop:
         Responsibility: control the sequence of play.
 
         Attributes:
-            _keyboard_ (Keyboard): for getting directional input to
+            _key_board_ (key_board): for getting directional input to
                 move the basket.
             _window_service (windowService): for providing video output
     '''
-    def __init__(self, keyboard, window_service):
-        ''' Consturcts a new loop using the specified keyboard and video services.
+    def __init__(self, key_board, window_service):
+        ''' Consturcts a new loop using the specified key board and video services.
 
             Args:
-                keyboard (Keyboard): an instance of the
-                    Keyboard class.
-                window_service (WindowService): an instance of the WindowService class.
+                key_board (key_board): an instance of the
+                    key_board class.
+                window_service (windowService): an instance of the windowService class.
         '''
         #declaring self variables from the given arguments
-        self._keyboard = keyboard
+        self._key_board = key_board
         self._window_service = window_service
         
     def start_game(self, object_list):
