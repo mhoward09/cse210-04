@@ -14,7 +14,7 @@ class Game_loop:
             Args:
                 keyboard (Keyboard): an instance of the
                     Keyboard class.
-                windoew_service (WindowService): an instance of the WiondowService class.
+                window_service (WindowService): an instance of the WindowService class.
         '''
         #declaring self variables from the given arguments
         self._keyboard = keyboard
