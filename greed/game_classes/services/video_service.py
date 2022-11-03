@@ -1,7 +1,7 @@
 #import needed libraries
 import pyray as pr
 
-class WindowService:
+class windowService:
     '''Outputs the game state.
 
     Responsibility: to control the game window and draw the game objects
