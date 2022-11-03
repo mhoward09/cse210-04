@@ -4,21 +4,21 @@ class Game_loop:
         Responsibility: control the sequence of play.
 
         Attributes:
-            _keyboard_service (KeyboardService): for getting directional input to
+            _keyboard_ (Keyboard): for getting directional input to
                 move the basket.
-            _video_service (VideoService): for providing video output
+            _window_service (windowService): for providing video output
     '''
-    def __init__(self, keyboard_service, video_service):
+    def __init__(self, keyboard, window_service):
         ''' Consturcts a new loop using the specified keyboard and video services.
 
             Args:
-                keyboard_service (KeyboardService): an instance of the
-                    KeyboardService class.
-                video_service (VideoService): an instance of the VideoService class.
+                keyboard (Keyboard): an instance of the
+                    Keyboard class.
+                windoew_service (WindowService): an instance of the WiondowService class.
         '''
         #declaring self variables from the given arguments
-        self._keyboard_service = keyboard_service
-        self._video_service = video_service
+        self._keyboard = keyboard
+        self._window_service = window_service
         
     def start_game(self, object_list):
         ''' Stats the game using the given list of objects. Runs the main game loop.
@@ -27,10 +27,10 @@ class Game_loop:
                 object_list (ObjectList): the objects for game play.
         '''
         counter = 0
-        #VideoService method to open window for game play
-        self._video_service.open_window()
+        #windowService method to open window for game play
+        self._window_service.open_window()
         #game loop that runs while the window is open
-        while self._video_service.is_window_open():
+        while self._window_service.is_window_open():
             self._get_inputs(object_list)
             self._do_updates(object_list)
             self._do_outputs(object_list)
@@ -44,7 +44,7 @@ class Game_loop:
             if counter % 12 == 0:
                 counter = 0
 
-        self._video_service.close_window()
+        self._window_service.close_window()
 
     def _get_inputs(self, object_list):
         """Gets directional input from the keyboard and applies it to the basket.
@@ -53,7 +53,7 @@ class Game_loop:
             cast (object_list): The cast of objects (the score display, the gems, the rocks and  the basket).
         """
         robot = object_list.get_first_game_object("robots")
-        velocity = self._keyboard_service.get_direction()
+        velocity = self._keyboard.get_direction()
         robot.set_velocity(velocity) 
         pass  
 
@@ -69,8 +69,8 @@ class Game_loop:
         fallingObject = cast.get_actors("fallingObject")
 
         score.set_text("Score: %s" % score.get_value())
-        max_x = self._video_service.get_width()
-        max_y = self._video_service.get_height()
+        max_x = self._window_service.get_width()
+        max_y = self._window_service.get_height()
         basket.move_next(max_x, max_y)
         
         for gameObject in fallingObject:
@@ -84,10 +84,10 @@ class Game_loop:
         Args:
             cast (object_list): The cast of actors.
         """
-        self._video_service.clear_buffer()
+        self._window_service.clear_buffer()
         listed_objects = object_list.get_all_game_objects()
-        self._video_service.draw_objectList(listed_objects)
-        self._video_service.flush_buffer()
+        self._window_service.draw_objectList(listed_objects)
+        self._window_service.flush_buffer()
         pass
 
     
