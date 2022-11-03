@@ -3,8 +3,8 @@ import random
 import pyray as pr
 
 #import service classes
-from game_classes.services.keyboard_service import KeyboardService
-from game_classes.services.video_service import VideoService
+from game_classes.services.key_board import Key_board
+from game_classes.services.window_service import WindowService
 
 #import shared classes
 from game_classes.shared.postion_point import PositionPoint
@@ -95,9 +95,9 @@ def main():
     createFallingObject("Gems", 1, objects)
 
     #start the game
-    keyboard_service = KeyboardService(CELL_SIZE)
-    video_service = VideoService(CAPTION, MAX_X, MAX_Y, CELL_SIZE, FRAME_RATE)
-    director = Game_loop(keyboard_service, video_service)
+    key_board = Key_board(SQUARE_SIZE)
+    window_service = Window_Service(CAPTION, MAX_X, MAX_Y, SQUARE_SIZE, FRAME_RATE)
+    director = Game_loop(key_board, window_service)
     director.start_game(objects)
 
 #call main function
