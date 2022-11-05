@@ -9,7 +9,6 @@ class Color:
         _blue (int): the blue value.
         _alpha (int): the opacity of the color.
     '''
-
     def __init__(self, red, green, blue, alpha = 255):
         ''' Constructs a new color using the specified RGB and alpha values. 
 
@@ -19,8 +18,10 @@ class Color:
             blue (int): the blue value
             alpha (int): the alpha value or opacity of the color.
         '''
-        #declare self variables from arguments
-        pass
+        self._red = red
+        self._green = green
+        self._blue = blue 
+        self._alpha = alpha
 
     def to_tuple(self):
         ''' Gets the color as a tuple of four values (red, green, blue, alpha).
@@ -28,4 +29,4 @@ class Color:
         Returns:
             Tuple (int, int, int, int): the color as a tuple
         '''
-        pass
+        return (self._red, self._green, self._blue, self._alpha)   
