@@ -3,8 +3,8 @@ import random
 import pyray as pr
 
 #import service classes
-from game_classes.services.key_board import Key_board
-from game_classes.services.window_service import WindowService
+from game_classes.services.keyboard_service import Keyboard
+from game_classes.services.video_service import WindowService
 
 #import shared classes
 from game_classes.shared.postion_point import PositionPoint
@@ -12,7 +12,7 @@ from game_classes.shared.color import Color
 
 #import actor classes
 from game_classes.casting.point_score import PointScore
-from game_classes.casting.basket import Basket
+#from game_classes.casting.basket import Basket
 from game_classes.casting.game_objects import GameObjects
 from game_classes.casting.rocks import Rocks
 from game_classes.casting.gems import Gems
@@ -34,11 +34,13 @@ WHITE = Color (255, 255, 255)
 DEFAULT_FALLING_OBJECTS = 10
 
 #define falling object creation function
-def createFallingObject(objectType, ratio, listObject):
-    for n in range(DEFAULT_FALLING_OBJECTS/ratio):
+def createFallingObject(objectType, ratio, listObject, character):
+    #commented this code from mhoward for now: for n in range(DEFAULT_FALLING_OBJECTS/ratio):
+    #replaced it with below
+    for n in range(ratio):
         #create object's starting postion and size
         xObject = random.randint(1, COLS -1)
-        yObject = random.randint(1, ROWS -1)
+        yObject = 0
         position = PositionPoint(xObject,yObject)
         position = position.scale(CELL_SIZE)
         #create object's color
@@ -47,12 +49,14 @@ def createFallingObject(objectType, ratio, listObject):
         b = random.randint(0,255)
         color = Color(r, g, b)
         #create object
-        fallingObject =  objectType()
+        fallingObject = GameObjects()
+        fallingObject.set_text(character)
         fallingObject.set_font_size(FONT_SIZE)
         fallingObject.set_color(color)
         fallingObject.set_position(position)
-        #add to objects lists
-        listObject.add_object(f"{objectType}", fallingObject)
+        #add to object list for drawing
+        listObject.add_object(objectType, fallingObject)
+
 
 #define main function
 def main():
@@ -71,11 +75,12 @@ def main():
     #add to object list for drawing
     objects.add_object("score", score)
 
+
     #create basket
     #basket starting postion
     #equivalent to ROBOT in RFK
     x = int(MAX_X/2)
-    y = int(MAX_Y/2)
+    y = int(MAX_Y - 60)
     start_position = PositionPoint(x,y)
     #basket creation
     basket = GameObjects()
@@ -86,19 +91,12 @@ def main():
     #add basket to object list for drawing
     objects.add_object("basket", basket)
 
-    #create rock objects
-    #equivalent to artifacts in RFK
-    createFallingObject("Rock", 2, objects)
-
-    #create gem objects
-    #equivalent to artifacts in RFK
-    createFallingObject("Gems", 1, objects)
-
     #start the game
-    key_board = Key_board(SQUARE_SIZE)
-    window_service = Window_Service(CAPTION, MAX_X, MAX_Y, SQUARE_SIZE, FRAME_RATE)
-    director = Game_loop(key_board, window_service)
+    keyboard_service = Keyboard(CELL_SIZE)
+    video_service = WindowService(CAPTION, MAX_X, MAX_Y, CELL_SIZE, FRAME_RATE)
+    director = Game_loop(keyboard_service, video_service)
     director.start_game(objects)
+
 
 #call main function
 if __name__ == "__main__":
