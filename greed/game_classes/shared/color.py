@@ -20,6 +20,10 @@ class Color:
             alpha (int): the alpha value or opacity of the color.
         '''
         #declare self variables from arguments
+        self._red = red
+        self._green = green
+        self._blue = blue
+        self._alpha = alpha
         pass
 
     def to_tuple(self):
@@ -28,4 +32,4 @@ class Color:
         Returns:
             Tuple (int, int, int, int): the color as a tuple
         '''
-        pass
+        return (self._red, self._green, self._blue, self._alpha)  
