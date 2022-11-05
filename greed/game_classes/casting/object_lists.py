@@ -1,6 +1,6 @@
 #equivalent to Cast() class in RFK
 
-class ObjectList:
+class ObjectLists:
     """A collection of Game Objects.
 
     The responsibility of a ObjectList is to keep track of a collection of Game Objects. It has methods for 
@@ -23,7 +23,7 @@ class ObjectList:
         """
 
         #add an item to a list
-        if not group in  self._game_objects():
+        if not group in self._game_objects.keys():
              self._game_objects[group] = []
             
         #append an item inside the array for the grop created
@@ -40,7 +40,7 @@ class ObjectList:
             List: The actors in the group.
         """
         results = []
-        if group in  self._game_objects():
+        if group in  self._game_objects.keys():
             results =  self._game_objects[group].copy()
         return results
     
@@ -65,7 +65,7 @@ class ObjectList:
             List: The first actor in the group.
         """
         result = None
-        if group in  self._game_objects():
+        if group in  self._game_objects.keys():
             result =  self._game_objects[group][0]
         return result
 
