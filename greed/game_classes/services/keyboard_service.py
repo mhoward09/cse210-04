@@ -1,10 +1,10 @@
 #import needed libraries
-import pyray 
+import pyray as pr
 
 #import needed classes
-from game_classes.shared.position_point import PositionPoint
+from game_classes.shared.postion_point import PositionPoint
 
-class key_board:
+class Keyboard:
     ''' Detects player keyboard input
 
     Responsibility: detect player key presses and translate them into a PositionPoint representing a direction (left or right).
@@ -18,8 +18,8 @@ class key_board:
         Args:
             square_size (int): the size of a square in the display grid.
         '''
-        #declare self variables and attributes from arguments
-         self._square_size = square_size
+        self._cell_size = square_size
+
 
     def get_direction(self):
         ''' Gets the selected direction based on the currently pressed keys.
@@ -30,19 +30,22 @@ class key_board:
         dx = 0
         dy = 0
 
-        if pyray.is_key_down(pyray.KEY_LEFT):
+        if pr.is_key_down(pr.KEY_LEFT):
             dx = -1
         
-        if pyray.is_key_down(pyray.KEY_RIGHT):
+        if pr.is_key_down(pr.KEY_RIGHT):
             dx = 1
         
-        if pyray.is_key_down(pyray.KEY_UP):
+        if pr.is_key_down(pr.KEY_UP):
             dy = -1
         
-        if pyray.is_key_down(pyray.KEY_DOWN):
+        if pr.is_key_down(pr.KEY_DOWN):
             dy = 1
 
-        direction = PositionPoint(dx, dy)
-        direction = direction.scale(self._square_size)
+        #enable up and down movement: direction = PositionPoint(dx, dy)
+        #disable up and down movement
+        direction = PositionPoint(dx, 0)
+        #scaled to specify the length of movement because dx dy is a unitless direction
+        direction = direction.scale(self._cell_size)
         
         return direction
