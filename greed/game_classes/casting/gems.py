@@ -1,8 +1,8 @@
 #equivalent to Artifact() class in RFK
-from game_classes.casting.game_objects import Game_object
+from game_classes.casting.game_objects import GameObjects
 
 
-class Gems(Game_object):
+class Gems(GameObjects):
     """
     An item that adds point. 
     
@@ -14,7 +14,7 @@ class Gems(Game_object):
 
     def __init__(self):
         super().__init__()
-        self._value = """any positive integer"""
+        self._value = int(10)
     pass
 
     def get_value(self):
