@@ -1,8 +1,8 @@
 #equivalent to Artifact() class in RFK
-from game_classes.casting.game_objects import Game_object
+from game_classes.casting.game_objects import GameObjects
 
 
-class Rocks(Game_object):
+class Rocks(GameObjects):
     """
     An item that deducts point. 
     
@@ -14,7 +14,7 @@ class Rocks(Game_object):
 
     def __init__(self):
         super().__init__()
-        self._value = """any negative integer"""
+        self._value = int(-10)
     pass
 
     def get_value(self):
