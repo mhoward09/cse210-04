@@ -1,12 +1,14 @@
 #import needed libraries
-import pyray 
+import pyray as pr
 
-class windowService:
+class WindowService:
     '''Outputs the game state.
 
     Responsibility: to control the game window and draw the game objects
     '''
     def __init__(self, caption, width, height, square_size, frame_rate, debug = False):
+        #if debug True a grid is displayed on the screen
+        #this is useful when tracking the movement of each game objects
         ''' Constructs a new WindowService using the specified debug mode.
         
         Args:
@@ -17,24 +19,24 @@ class windowService:
             frams_rate (int): the rate of frame refresh and speed of the game.
             debug (bool): whether or not to draw in debug mode.
             '''
-        #declare self variables and attributes from arguments
         self._caption = caption
         self._width = width
         self._height = height
-        self._square_size = square_size
+        self._cell_size = square_size
         self._frame_rate = frame_rate
+        #debug only to display the grid
         self._debug = debug
 
     def close_window(self):
         ''' Closes the window and releases all computing resources
         '''
-         pyray.close_window()
+        pr.close_window()
 
     def clear_buffer(self):
         '''Clears the buffer in preparation for the next rendering. this method should be called at the beginning of the game's output phase
         '''
-        pyray.begin_drawing()
-        pyray.clear_background(pyray.BLACK)
+        pr.begin_drawing()
+        pr.clear_background(pr.BLACK)
         if self._debug == True:
             self._draw_grid()
 
@@ -49,7 +51,7 @@ class windowService:
         y = object.get_position().get_y()
         font_size = object.get_font_size()
         color = object.get_color().to_tuple()
-        pyray.draw_text(text, x, y, font_size, color)
+        pr.draw_text(text, x, y, font_size, color)
 
     def draw_objectList(self, objectList):
         ''' Draws the objects in the given list of objects.
@@ -63,7 +65,7 @@ class windowService:
     def flush_buffer(self):
         ''' Copies the buffer contents to the screen. This method should be called at the end of the game's output phase.
         '''
-        pyray.end_drawing()
+        pr.end_drawing()
 
     def get_square_size(self):
         '''Get's the video screen's square size.
@@ -71,7 +73,7 @@ class windowService:
         Returns:
             Gird: the video screen's square size.
         '''
-        return self._square_size
+        return self._cell_size
 
     def get_height(self):
         '''Gets the video screen's height.
@@ -95,7 +97,7 @@ class windowService:
         Returns:
             bool: True if the window is closing: False if otherwise.
         '''
-        return not pyray.window_should_close()
+        return not pr.window_should_close()
 
     def open_window(self):
         ''' Opens a new window with the provided caption.
@@ -103,13 +105,13 @@ class windowService:
         Args:
             caption (string): the caption provided to be the title.
         '''
-        pyray.init_window(self._width, self._height, self._caption)
-        pyray.set_target_fps(self._frame_rate)
+        pr.init_window(self._width, self._height, self._caption)
+        pr.set_target_fps(self._frame_rate)
 
     def _draw_grid(self):
         '''Draws a grid ont he screen. Used for debugging purposes
         '''
-        for y in range(0, self._height, self._square_size):
-            pyray.draw_line(0, y, self._width, y, pyray.GRAY)
-        for x in range(0, self._width, self._square_size):
-            pyray.draw_line(x, 0, x, self._height, pyray.GRAY)
+        for y in range(0, self._height, self._cell_size):
+            pr.draw_line(0, y, self._width, y, pr.WHITE)
+        for x in range(0, self._width, self._cell_size):
+            pr.draw_line(x, 0, x, self._height, pr.WHITE)
