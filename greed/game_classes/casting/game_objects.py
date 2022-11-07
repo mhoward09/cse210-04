@@ -14,6 +14,7 @@ class GameObjects:
     def __init__(self):
         """Constructs a new Game Object."""
         self._text = ""
+        self._game_objects_value = 0
         self._font_size = 15
         self._color = Color(255, 255, 255)
         self._position = PositionPoint(0, 0)
@@ -26,6 +27,14 @@ class GameObjects:
             Color: The Game Object's text color.
         """
         return self._color
+    
+    def get_game_objects_value(self):
+        """Gets the Game Object's score value.
+        
+        Returns:
+            integer: Accumulated score
+        """
+        return self._game_objects_value
 
     def get_font_size(self):
         """Gets the Game Object's font size.
@@ -81,6 +90,15 @@ class GameObjects:
             color (Color): The given color.
         """
         self._color = color
+
+    def set_game_objects_value(self, new_score):
+        """Updates the score value .
+        
+        Args:
+            integer: the updated score value.
+        """
+        self._game_objects_value += new_score
+
 
     def set_position(self, position):
             """Updates the position to the given one.

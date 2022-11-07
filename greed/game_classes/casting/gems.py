@@ -15,7 +15,7 @@ class Gems(GameObjects):
     def __init__(self):
         super().__init__()
         self._value = int(10)
-    pass
+
 
     def get_value(self):
         """Gets the point of the gem.

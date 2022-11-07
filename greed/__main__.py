@@ -22,7 +22,7 @@ from game_classes.casting.object_lists import ObjectLists
 from game_classes.game_loop import Game_loop
 
 #set global attributes/arguments
-FRAME_RATE = 12
+FRAME_RATE = 24
 MAX_X = 900
 MAX_Y = 600
 CELL_SIZE = 15
@@ -49,7 +49,10 @@ def createFallingObject(objectType, ratio, listObject, character):
         b = random.randint(0,255)
         color = Color(r, g, b)
         #create object
-        fallingObject = GameObjects()
+        if objectType == "rock":
+            fallingObject = Rocks()
+        if objectType == "gem":
+            fallingObject = Gems    ()
         fallingObject.set_text(character)
         fallingObject.set_font_size(FONT_SIZE)
         fallingObject.set_color(color)
@@ -68,7 +71,7 @@ def main():
     #create the score display
     #equivalent to banner in RFK
     score = GameObjects()
-    score.set_text("Score: ")
+    score.set_text(f'Score: ')
     score.set_font_size(FONT_SIZE)
     score.set_color(WHITE)
     score.set_position(PositionPoint(CELL_SIZE, 0))

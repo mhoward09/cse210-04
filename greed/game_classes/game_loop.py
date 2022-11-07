@@ -71,11 +71,8 @@ class Game_loop:
             gem.move_next(max_x, max_y)
             ypos = gem._position.get_y()
             #if a falling object reached the bottom it will be removed
-            #we could also use the remove_game_object() method from ObjectLists I just realized
-            #this will do for now
             if ypos >= 580:
-                object_list._game_objects[falling_type].remove(gem)
-
+                object_list.remove_game_object(falling_type, gem)
 
     def _get_inputs(self, object_list):
         """Gets directional input from the keyboard and applies it to the basket.
@@ -95,13 +92,25 @@ class Game_loop:
         Args:
             cast (object_list): The list of objects
         """
-        #this code actullly moves the basket
-        #up and down movement of the basket disabled
         max_x = self._window_service.get_width()
         max_y = self._window_service.get_height()
+        score = object_list.get_first_game_object("score")
         basket = object_list.get_first_game_object("basket")
+        rocks = object_list._game_objects["rock"]
+        #rocks2 = object_list._game_objects["rocks"]
+        gems = object_list._game_objects["gem"]
+        
+        #making the basket move based on user inputs
+        #up and down movement of the basket disabled
         basket.move_next(max_x, max_y)
 
+        for type in [rocks, gems]:
+            for falling in type:
+                if basket.get_position().equals(falling.get_position()):
+                    earned_score = falling.get_value()
+                    score.set_game_objects_value(earned_score)
+                    score.set_text(f'Score: {score.get_game_objects_value()}')
+                    type.remove(falling)               
 
     def _do_outputs(self, object_list):
         """Draws the object_list on the screen.
